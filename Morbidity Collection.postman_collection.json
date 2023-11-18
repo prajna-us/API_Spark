@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "d70473df-6bd0-44f1-b648-2d23938b2600",
+		"name": "Morbidity Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31183628",
+		"_collection_link": "https://gold-capsule-604611.postman.co/workspace/TEAM11-ApiSpark-Dietician-API-H~7221bf9f-25e9-463a-bc13-3c922b720213/collection/31183628-d70473df-6bd0-44f1-b648-2d23938b2600?action=share&source=collection_link&creator=31183628"
+	},
+	"item": [
+		{
+			"name": "Get all morbidity  Positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// pm.test(\"Content-Type is present\", function () {\r",
+							"//     pm.response.to.have.header(\"Content-Type\");\r",
+							"// });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYWxsYXZpLmNoYXViZXk4OUBnbWFpbC5jb20iLCJpYXQiOjE3MDAyNzcxNDEsImV4cCI6MTcwMDMwNTk0MX0.iw2tBbLPVSeFF62DiwcQX3zKkeq3OUXOOyLvu_l2P2Y5mMziz_qmfwFWWJBiIRDfVqZTnzHLItdhtxMpXJp-jA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{Baseurl}}/morbidity",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"morbidity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mobidity Name by test name Positive",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"/*[\r",
+							"    {\r",
+							"        \"morbidityId\": 1,\r",
+							"        \"morbidityTestId\": \"DIA_FG\",\r",
+							"        \"morbidityNameRegex\": \"(?i)(.*)fasting(.*)[sugarglucose](.*)|(.*)glucose(.*)fasting(.*)\",\r",
+							"        \"morbidityTestName\": \"Fasting Glucose\",\r",
+							"        \"morbidityTestUnit\": \"mg/dL\",\r",
+							"        \"morbidityMarkerMinVal\": 100.0,\r",
+							"        \"morbidityMarkerMaxVal\": 125.0\r",
+							"    }\r",
+							"]*/\r",
+							"// Parse the response body as JSON\r",
+							"var responseBody = pm.response.json();\r",
+							"\r",
+							"console.log(\"response\",responseBody);\r",
+							"var response = responseBody[0];\r",
+							"\r",
+							"// Example test: Check if the response contains a morbidityDetails\r",
+							"pm.test(\"Response should have a morbidityId\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityId');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityTestId\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityTestId');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityNameRegex\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityNameRegex');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityTestName\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityTestName');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityTestUnit\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityTestUnit');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityMarkerMinVal\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityMarkerMinVal');\r",
+							"});\r",
+							"pm.test(\"Response should have a morbidityMarkerMaxVal\", function() {\r",
+							"    pm.expect(response).to.have.property('morbidityMarkerMaxVal');\r",
+							"});\r",
+							"\r",
+							"//Define the JSON schema that you want to validate\r",
+							"var schema = {\r",
+							" \r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": [\r",
+							"    {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"morbidityId\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"morbidityTestId\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"morbidityNameRegex\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"morbidityTestName\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"morbidityTestUnit\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"morbidityMarkerMinVal\": {\r",
+							"          \"type\": \"number\"\r",
+							"        },\r",
+							"        \"morbidityMarkerMaxVal\": {\r",
+							"          \"type\": \"number\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"morbidityId\",\r",
+							"        \"morbidityTestId\",\r",
+							"        \"morbidityNameRegex\",\r",
+							"        \"morbidityTestName\",\r",
+							"        \"morbidityTestUnit\",\r",
+							"        \"morbidityMarkerMinVal\",\r",
+							"        \"morbidityMarkerMaxVal\"\r",
+							"      ]\r",
+							"    }\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"//Validate the response body\r",
+							"pm.test('Schema validation', () => {\r",
+							"  pm.response.to.have.jsonSchema (schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYWxsYXZpLmNoYXViZXk4OUBnbWFpbC5jb20iLCJpYXQiOjE3MDAyNzcxNDEsImV4cCI6MTcwMDMwNTk0MX0.iw2tBbLPVSeFF62DiwcQX3zKkeq3OUXOOyLvu_l2P2Y5mMziz_qmfwFWWJBiIRDfVqZTnzHLItdhtxMpXJp-jA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "ZQE7_ZosX/External morbidity name Valid.json",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Baseurl}}/morbidity/{{morbidityName}}",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"morbidity",
+						"{{morbidityName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "morbidityName Invaild",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYWxsYXZpLmNoYXViZXk4OUBnbWFpbC5jb20iLCJpYXQiOjE3MDAyNzcxNDEsImV4cCI6MTcwMDMwNTk0MX0.iw2tBbLPVSeFF62DiwcQX3zKkeq3OUXOOyLvu_l2P2Y5mMziz_qmfwFWWJBiIRDfVqZTnzHLItdhtxMpXJp-jA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Baseurl}}/morbidity/abcd",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"morbidity",
+						"abcd"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
