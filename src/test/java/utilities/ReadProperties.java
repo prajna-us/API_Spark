@@ -10,13 +10,10 @@ import java.util.Properties;
 
 public class ReadProperties {
 
-    static Properties props = new Properties();
-
-
     private static final String CONFIG_FILE_PATH = "src/test/resources/pathAll.properties";
-    private static final Properties properties;
+    private static Properties properties;
 
-    static {
+    public static void loadConfig() {
         properties = new Properties();
         try {
 
@@ -58,6 +55,10 @@ public class ReadProperties {
             ex.printStackTrace();
         }
 
+    }
+
+    public static void reload() {
+        loadConfig();
     }
 
 

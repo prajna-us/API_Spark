@@ -108,12 +108,12 @@ Feature: Patient Feature
 #    When User sends HTTPS Request and  request Body with mandatory , additional  field and updates Date of Birth field
 #    Then User receives 200 OK Status with response body
 #
-#  @17PutRequestWrongBaseUrl
-#  Scenario: Check if user able to update a patient detail by using wrong BaseURL with missing field in request body
-#    Given User creates PUT Request for the  PatientAPI endpoint
-#    When User sends HTTPS Request and  request Body with mandatory , additional  field
-#    Then User receives 404 Not Found Status with response body
-#
+  @17PutRequestWrongBaseUrl
+  Scenario: Check if user able to update a patient detail by using wrong BaseURL with missing field in request body
+    Given User creates PUT Request for the  PatientAPI endpoint
+    When User sends HTTPS Request and  request Body with mandatory , additional  field to update patient details to wrong URL
+    Then User receives 400 Not Found Status with response body
+
   @18DeleteRequestExistingPatient
   Scenario: Check if user able to delete  a patient detail by using patientId  with valid endpoint and request body
     Given User creates DELETE Request for the PatientAPI endpoint

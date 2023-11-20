@@ -145,9 +145,16 @@ public class PatientSD {
         assertEquals(expectedStatusCode, response.getStatusCode());
 
         patientId = response.then().extract().path("patientId");
+        System.out.println("patientId from response is: " + patientId);
 
         try {
+
+            System.out.println("Writing config file...");
             ReadProperties.storeInConfig("patientId", String.valueOf(patientId));
+
+            ReadProperties.reload();
+
+            System.out.println("PatienId from config is: " + ReadProperties.getProperty("patientId"));
 
         } catch (IOException E) {
 
@@ -203,6 +210,7 @@ public class PatientSD {
 
         //log file entry
         LoggerLoad.info("Reading token...");
+        ReadProperties.loadConfig();
 
         //reading token from properties file.
         bearerToken = ReadProperties.getProperty("bearerToken");
@@ -350,6 +358,57 @@ public class PatientSD {
 
     }
 
+    @When("User sends HTTPS Request and  request Body with mandatory , additional  field to update patient details to wrong URL")
+    public void invalidPUTURL() {
+
+        //log file entry
+        LoggerLoad.info("Reading PUT endpoint...");
+
+        String endpoint = ReadProperties.getProperty("Update_Patient_Invalid_URL");
+
+        System.out.println(endpoint);
+
+
+        LoggerLoad.info("Making PUT call to update patient...");
+
+
+        //Reading test data
+        JSONObject testData = readJson.setUpTestData();
+        JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("UpdatePatient"));
+
+
+        //reading reprot file...
+        File file = new File(patientInfo.getString("ReportFileLoc"));
+
+
+        // Convert patientInfo to JSON string
+        String patientInfoJson = "{" +
+                "\"FirstName\":\"" + patientInfo.getString("FirstNameUpdate") + "\"," +
+                "\"LastName\":\"" + patientInfo.getString("LastNameUpdate") + "\"," +
+                "\"ContactNumber\":" + patientInfo.getString("ContactNumber") + "," +
+                "\"Email\":\"" + patientInfo.getString("Email") + "\"," +
+                "\"Allergy\":\"" + patientInfo.getString("AllergyUpdate") + "\"," +
+                "\"FoodCategory\":\"" + patientInfo.getString("FoodCategoryUpdate") + "\"," +
+                "\"DateOfBirth\":\"" + patientInfo.getString("DateOfBirthUpdate") + "\"" +
+                "}";
+
+        System.out.println(patientInfoJson);
+
+        System.out.println("Request Body: " + requestSpec.log().all().toString());
+
+        // Send the POST request with form parameters
+        response = requestSpec
+                .multiPart("patientInfo", patientInfoJson)
+                .multiPart("file", file)
+                .contentType(ContentType.MULTIPART)
+                .put(endpoint);
+
+        // Log the response body
+        response.body().print();
+
+
+
+    }
 
     @Then("User receives {int} Not Found Status with response body")
     public void user_receives_Not_Found_Status_with_response_body(int expectedStatusCode) {
