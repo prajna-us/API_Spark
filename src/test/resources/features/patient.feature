@@ -26,25 +26,25 @@ Feature: Patient Feature
     Given User creates GET Request for the  API endpoint
     When User sends HTTPS Request for patients
     Then User receives 200 OK Status with response body
-#
+
 #  @05GetRequestValidPatientId
 #  Scenario: Check if user is able to retrieve patient using patientId with valid API
 #    Given User creates GET Request for the  API endpoint
 #    When User sends HTTPS Request
 #    Then User receives 200 OK Status with response body
-#
+
 #  @06GetRequestInValidPatientId
 #  Scenario: Check if user is able to retrieve patient using invalid patientId with valid API
 #    Given User creates GET Request for the  API endpoint
 #    When User sends HTTPS Request
 #    Then User receives 404 Not Found Status with Response body
-#
-#  @07GetRequestValidFileId
-#  Scenario: Check if user is able to retrieve patient file by fileId with valid API
-#    Given User creates GET Request for the  API endpoint
-#    When User sends HTTPS Request
-#    Then User receives 200 OK Status with response body
-#
+
+  @07GetRequestValidFileId
+  Scenario: Check if user is able to retrieve patient file by fileId with valid API
+    Given User creates GET Request for the  API endpoint
+    When User sends HTTPS Request
+    Then User receives 200 OK Status with response body
+
 #  @08GetRequestInValidFileId
 #  Scenario: Check if user is able to retrieve patient file by invalid fileId with valid API
 #    Given User creates GET Request for the  API endpoint
@@ -125,4 +125,4 @@ Feature: Patient Feature
 #    Given User creates DELETE Request for the PatientAPI endpoint
 #    When User sends HTTPS Request and  request Body with mandatory patientId field for non-existing patient
 #    Then User receives 404 Not Found Status with response body
-#
+

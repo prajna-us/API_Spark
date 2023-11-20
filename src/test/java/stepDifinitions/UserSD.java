@@ -3,7 +3,10 @@ package stepDifinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import utilities.LoggerLoad;
+import utilities.ReadProperties;
 
 public class UserSD {
 
@@ -68,10 +71,7 @@ public class UserSD {
 
     }
 
-    @When("User sends HTTPS Request")
-    public void user_sends_HTTPS_Request() {
 
-    }
 
     @Then("User receives {int} OK Status with response  Logout successful")
     public void user_receives_OK_Status_with_response_Logout_successful(Integer int1) {

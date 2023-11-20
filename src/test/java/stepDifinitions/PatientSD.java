@@ -13,6 +13,7 @@ import utilities.ReadJson;
 import utilities.ReadProperties;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,6 +25,8 @@ public class PatientSD {
 
     private Response response;
     private String bearerToken;
+
+    private int patientId;
 
     private String requestBody;
 
@@ -89,6 +92,16 @@ public class PatientSD {
 
         LoggerLoad.info("Asserting response status code...");
         assertEquals(expectedStatusCode, response.getStatusCode());
+
+        patientId = response.then().extract().path("patientId");
+
+        try {
+            ReadProperties.storeInConfig("patientId", String.valueOf(patientId));
+
+        } catch (IOException E) {
+
+        }
+
 
 
     }
@@ -159,6 +172,29 @@ public class PatientSD {
         //setting URI for RestAssured
         RestAssured.baseURI = baseURL;
 
+
+    }
+
+    @When("User sends HTTPS Request")
+    public void user_sends_HTTPS_Request() {
+
+//        Get_Patients_Morbidity_Details
+        //log file entry
+        LoggerLoad.info("Reading GET endpoint...");
+
+        //reading GET endpoint from properties file
+        String endpoint = ReadProperties.getProperty("Get_Patients_Morbidity_Details") + ReadProperties.getProperty("patientId");
+
+        System.out.println("patientId   " + ReadProperties.getProperty("patientId"));
+        System.out.println(endpoint);
+
+        //log file entry
+        LoggerLoad.info("Making Get all Patients call...");
+
+        //Making the GET call by passing the auth token
+        response = RestAssured.given()
+                .header("Authorization", "Bearer " + bearerToken)
+                .get(endpoint);
 
     }
 
