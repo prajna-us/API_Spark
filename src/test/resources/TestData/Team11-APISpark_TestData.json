@@ -2,11 +2,11 @@
   "1": {
     "FirstName": "Jennifer",
     "LastName": "Walker",
-    "ContactNumber": "2256545622",
+    "ContactNumber": "2256545625",
     "Email": "jw1985@gmail.com",
     "Allergy": "Soy",
     "FoodCategory": "VEGETARIAN",
-    "DateOfBirth": "1996-07-10",
+    "DateOfBirth": "1999-07-10",
     "password": "test",
     "invalidEmail": "palla@gmail123",
     "invalidPW": "login",
