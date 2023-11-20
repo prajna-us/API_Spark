@@ -13,14 +13,13 @@ import utilities.ReadJson;
 import utilities.ReadProperties;
 
 import java.io.File;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class PatientSD {
 
-    private ReadJson readJson = new ReadJson();
+    private final ReadJson readJson = new ReadJson();
     private RequestSpecification requestSpec;
 
     private Response response;
@@ -36,33 +35,11 @@ public class PatientSD {
         LoggerLoad.info("Setting baseURI for RestAssured...");
 
         //reading properties file.
-        String baseURL = ReadProperties.getProperty("baseURL");
-        RestAssured.baseURI = baseURL;
-
-        //Creating request body....NEED TO MOVE THIS TO EXCEL READER
-
-//        requestBody = "\"patientInfo\",\"{\n" +
-//                "  \\\"FirstName\\\": \\\"Rahul1\\\",\n" +
-//                "  \\\"LastName\\\": \\\"Joshi\\\",\n" +
-//                "   \\\"ContactNumber\\\": \\\"3169874561\\\",\n" +
-//                "    \\\"Email\\\": \\\"mandarjoshi1978@gmail.com\\\",\n" +
-//                "    \\\"Allergy\\\": \\\"Soy\\\",\n" +
-//                "     \\\"FoodCategory\\\": \\\"Vegan\\\",\n" +
-//                "      \\\"DateOfBirth\\\": \\\"1982-04-07\\\"\n" +
-//                "\t\n" +
-//                "}\"";
-
-
-
-
-//        System.out.println(requestBody);
-
+        RestAssured.baseURI = ReadProperties.getProperty("baseURL");
 
         requestSpec = RestAssured.given()
                 .header("Authorization", "Bearer " + bearerToken)
                 .contentType(ContentType.MULTIPART);
-
-
     }
 
     @When("User sends HTTPS Request and  request Body with mandatory , additional  field")
@@ -75,61 +52,15 @@ public class PatientSD {
 
         LoggerLoad.info("Making POST call to create patient...");
 
-        System.out.println(bearerToken);
-        System.out.println(requestBody);
-        System.out.println(endpoint);
 
-
-        //Making post call
-//        response = RestAssured.given()
-//                .header("Authorization", "Bearer " + bearerToken)
-//                .contentType(ContentType.JSON)
-//                .body(requestBody)
-//                .post(endpoint);
-
-//        {
-//            "FirstName": "Rahul1",
-//                "LastName": "Joshi",
-//                "ContactNumber": "7855425107",
-//                "Email": "mandarjoshi1977@gmail.com",
-//                "Allergy": "Soy",
-//                "FoodCategory": "Vegan",
-//                "DateOfBirth": "1982-04-07"
-//
-//        }
-
-//        File file = new File("src/test/resources/PatientReports/HyperThyroid_Report_final.pdf");
-//
-//
-//        response = RestAssured.given()
-//                .header("Authorization", "Bearer " + bearerToken)
-//                .multiPart("FirstName", "Rahul1")
-//                .multiPart("LastName", "Joshi")
-//                .multiPart("ContactNumber", "7855425901")
-//                .multiPart("Email", "mandarjoshi198@gmail.com")
-//                .multiPart("Allergy", "Soy")
-//                .multiPart("FoodCategory", "Vegan")
-//                .multiPart("DateOfBirth", "1982-04-07")
-//                .multiPart("file", file, "application/octet-stream")
-//                .post(endpoint); // Replace with your endpoint
-//
-//        System.out.println(response.body().print());
-
+        //Reading test data
         JSONObject testData = readJson.setUpTestData();
         JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("CreatePatient"));
 
 
-        File file = new File("src/test/resources/PatientReports/HyperThyroid_Report_final.pdf");
+        //reading reprot file...
+        File file = new File(patientInfo.getString("ReportFileLoc"));
 
-//        //   .multiPart("file", file);
-//        HashMap<String, Object> patientInfo = new HashMap<>();
-//        patientInfo.put("FirstName", "John");
-//        patientInfo.put("LastName", "Ras");
-//        patientInfo.put("ContactNumber", "5680003421");
-//        patientInfo.put("Email", "abcthu@gmail.com");
-//        patientInfo.put("Allergy", "Soy");
-//        patientInfo.put("FoodCategory", "Vegan");
-//        patientInfo.put("DateOfBirth", "1990-07-02");
 
         // Convert patientInfo to JSON string
         String patientInfoJson = "{" +
@@ -148,12 +79,8 @@ public class PatientSD {
                 .multiPart("file", file)
                 .post(endpoint);
 
-        // Log the request body
-        System.out.println("Request Body: " + requestSpec.log().all().toString());
-
         // Log the response body
         response.body().print();
-
 
     }
 
