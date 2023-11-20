@@ -87,6 +87,57 @@ public class PatientSD {
 
     }
 
+
+    @When("User sends HTTPS Request and  request Body with mandatory , additional  field to update patient details")
+    public void user_sends_update_request_with_mandatory_and_optional_fields() {
+
+        //log file entry
+        LoggerLoad.info("Reading PUT endpoint...");
+
+        String endpoint = ReadProperties.getProperty("Update_Patient_By_UserId") + ReadProperties.getProperty("patientId");
+
+        System.out.println(endpoint);
+
+
+        LoggerLoad.info("Making PUT call to update patient...");
+
+
+        //Reading test data
+        JSONObject testData = readJson.setUpTestData();
+        JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("UpdatePatient"));
+
+
+        //reading reprot file...
+        File file = new File(patientInfo.getString("ReportFileLoc"));
+
+
+        // Convert patientInfo to JSON string
+        String patientInfoJson = "{" +
+                "\"FirstName\":\"" + patientInfo.getString("FirstNameUpdate") + "\"," +
+                "\"LastName\":\"" + patientInfo.getString("LastNameUpdate") + "\"," +
+                "\"ContactNumber\":" + patientInfo.getString("ContactNumber") + "," +
+                "\"Email\":\"" + patientInfo.getString("Email") + "\"," +
+                "\"Allergy\":\"" + patientInfo.getString("AllergyUpdate") + "\"," +
+                "\"FoodCategory\":\"" + patientInfo.getString("FoodCategoryUpdate") + "\"," +
+                "\"DateOfBirth\":\"" + patientInfo.getString("DateOfBirthUpdate") + "\"" +
+                "}";
+
+        System.out.println(patientInfoJson);
+
+        System.out.println("Request Body: " + requestSpec.log().all().toString());
+
+        // Send the POST request with form parameters
+        response = requestSpec
+                .multiPart("patientInfo", patientInfoJson)
+                .multiPart("file", file)
+                .contentType(ContentType.MULTIPART)
+                .put(endpoint);
+
+        // Log the response body
+        response.body().print();
+
+
+    }
     @Then("User receives  Created Status {int} with response body")
     public void user_receives_Created_Status_with_response_body(int expectedStatusCode) {
 
@@ -245,6 +296,16 @@ public class PatientSD {
     @Given("User creates PUT Request for the  PatientAPI endpoint")
     public void user_creates_PUT_Request_for_the_PatientAPI_endpoint() {
 
+        //log file entry
+        LoggerLoad.info("Setting baseURI for RestAssured...");
+
+        //reading properties file.
+        RestAssured.baseURI = ReadProperties.getProperty("baseURL");
+
+        requestSpec = RestAssured.given()
+                .header("Authorization", "Bearer " + bearerToken)
+                .contentType(ContentType.MULTIPART);
+
     }
 
 
@@ -291,13 +352,43 @@ public class PatientSD {
 
 
     @Then("User receives {int} Not Found Status with response body")
-    public void user_receives_Not_Found_Status_with_response_body(Integer int1) {
+    public void user_receives_Not_Found_Status_with_response_body(int expectedStatusCode) {
+
+        //log file entry
+        LoggerLoad.info("Asserting response status code...");
+
+        //Asserting 200 status code
+        assertEquals(expectedStatusCode, response.getStatusCode());
+
+        // Log the response body
+        response.body().print();
 
     }
 
 
     @When("User sends HTTPS Request and  request Body with mandatory patientId field for existing patient")
     public void user_sends_HTTPS_Request_and_request_Body_with_mandatory_patientId_field_for_existing_patient() {
+
+
+        //log file entry
+        LoggerLoad.info("Reading DELETE endpoint...");
+
+        String endpoint = ReadProperties.getProperty("Delete_Patient_By_UserId") + ReadProperties.getProperty("patientId");
+
+        System.out.println(endpoint);
+
+
+        LoggerLoad.info("Making DELETE call to update patient...");
+
+
+        System.out.println("Request Body: " + requestSpec.log().all().toString());
+
+        // Send the POST request with form parameters
+        response = requestSpec
+                .delete(endpoint);
+
+        // Log the response body
+        response.body().print();
 
     }
 
@@ -331,10 +422,41 @@ public class PatientSD {
     @Given("User creates DELETE Request for the PatientAPI endpoint")
     public void user_creates_DELETE_Request_for_the_PatientAPI_endpoint() {
 
+
+        //log file entry
+        LoggerLoad.info("Setting baseURI for RestAssured...");
+
+        //reading properties file.
+        RestAssured.baseURI = ReadProperties.getProperty("baseURL");
+
+        requestSpec = RestAssured.given()
+                .header("Authorization", "Bearer " + bearerToken);
+
     }
 
     @When("User sends HTTPS Request and  request Body with mandatory patientId field for non-existing patient")
     public void user_sends_HTTPS_Request_and_request_Body_with_mandatory_patientId_field_for_non_existing_patient() {
+
+
+        //log file entry
+        LoggerLoad.info("Reading DELETE endpoint...");
+
+        String endpoint = ReadProperties.getProperty("Delete_Patient_By_UserId") + ReadProperties.getProperty("invalidPatientId");
+
+        System.out.println(endpoint);
+
+
+        LoggerLoad.info("Making DELETE call to update patient...");
+
+
+        System.out.println("Request Body: " + requestSpec.log().all().toString());
+
+        // Send the POST request with form parameters
+        response = requestSpec
+                .delete(endpoint);
+
+        // Log the response body
+        response.body().print();
 
     }
 

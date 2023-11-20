@@ -50,13 +50,13 @@ Feature: Patient Feature
     Given User creates GET Request for the  API endpoint
     When User sends HTTPS Request with invalid patient id
     Then User receives 404 Not Found Status with Response body
-#
-#  @09PutRequestUsingPatientIdAndPatientInfo
-#  Scenario: Check if user able to update a patient detail by using patientId and patientInfo with valid endpoint
-#  and request body
-#    Given User creates PUT Request for the  PatientAPI endpoint
-#    When User sends HTTPS Request and  request Body with mandatory , additional  field
-#    Then User receives 200 OK Status with response body
+
+  @09PutRequestUsingPatientIdAndPatientInfo
+  Scenario: Check if user able to update a patient detail by using patientId and patientInfo with valid endpoint
+  and request body
+    Given User creates PUT Request for the  PatientAPI endpoint
+    When User sends HTTPS Request and  request Body with mandatory , additional  field to update patient details
+    Then User receives 200 OK Status with response body
 #
 #  @10PutRequestUsingMandoryAditionalWithUpdatesFirstName
 #  Scenario: Check if user able to update a patient detail by using patientId and patientInfo with valid endpoint
@@ -114,15 +114,15 @@ Feature: Patient Feature
 #    When User sends HTTPS Request and  request Body with mandatory , additional  field
 #    Then User receives 404 Not Found Status with response body
 #
-#  @18DeleteRequestExistingPatient
-#  Scenario: Check if user able to delete  a patient detail by using patientId  with valid endpoint and request body
-#    Given User creates DELETE Request for the PatientAPI endpoint
-#    When User sends HTTPS Request and  request Body with mandatory patientId field for existing patient
-#    Then User receives 200 OK Status with response body
-#
-#  @19DeleteRequestNonExistingPatient
-#  Scenario: Check if user able to delete  a patient detail by using patientId  with valid endpoint and request body
-#    Given User creates DELETE Request for the PatientAPI endpoint
-#    When User sends HTTPS Request and  request Body with mandatory patientId field for non-existing patient
-#    Then User receives 404 Not Found Status with response body
+  @18DeleteRequestExistingPatient
+  Scenario: Check if user able to delete  a patient detail by using patientId  with valid endpoint and request body
+    Given User creates DELETE Request for the PatientAPI endpoint
+    When User sends HTTPS Request and  request Body with mandatory patientId field for existing patient
+    Then User receives 200 OK Status with response body
+
+  @19DeleteRequestNonExistingPatient
+  Scenario: Check if user able to delete  a patient detail by using  invalid patientId  with valid endpoint and request body
+    Given User creates DELETE Request for the PatientAPI endpoint
+    When User sends HTTPS Request and  request Body with mandatory patientId field for non-existing patient
+    Then User receives 404 Not Found Status with response body
 
