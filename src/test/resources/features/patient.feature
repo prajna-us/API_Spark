@@ -39,17 +39,17 @@ Feature: Patient Feature
 #    When User sends HTTPS Request
 #    Then User receives 404 Not Found Status with Response body
 
-  @07GetRequestValidFileId
+  @07GetRequestPatientsMorbidityDetails
   Scenario: Check if user is able to retrieve patient file by fileId with valid API
     Given User creates GET Request for the  API endpoint
     When User sends HTTPS Request
     Then User receives 200 OK Status with response body
 
-#  @08GetRequestInValidFileId
-#  Scenario: Check if user is able to retrieve patient file by invalid fileId with valid API
-#    Given User creates GET Request for the  API endpoint
-#    When User sends HTTPS Request
-#    Then User receives 404 Not Found Status with Response body
+  @08GetRequestInvalidPatientsMorbidityDetails
+  Scenario: Check if user is able to retrieve patient file by invalid fileId with valid API
+    Given User creates GET Request for the  API endpoint
+    When User sends HTTPS Request with invalid patient id
+    Then User receives 404 Not Found Status with Response body
 #
 #  @09PutRequestUsingPatientIdAndPatientInfo
 #  Scenario: Check if user able to update a patient detail by using patientId and patientInfo with valid endpoint

@@ -198,6 +198,29 @@ public class PatientSD {
 
     }
 
+    @When("User sends HTTPS Request with invalid patient id")
+    public void user_sends_HTTPS_Request_with_invalid_patient_id() {
+
+//        Get_Patients_Morbidity_Details
+        //log file entry
+        LoggerLoad.info("Reading GET endpoint...");
+
+        //reading GET endpoint from properties file
+        String endpoint = ReadProperties.getProperty("Get_Patients_Morbidity_Details") + ReadProperties.getProperty("invalidPatientId");
+
+        System.out.println("patientId   " + ReadProperties.getProperty("invalidPatientId"));
+        System.out.println(endpoint);
+
+        //log file entry
+        LoggerLoad.info("Making Get all Patients call...");
+
+        //Making the GET call by passing the auth token
+        response = RestAssured.given()
+                .header("Authorization", "Bearer " + bearerToken)
+                .get(endpoint);
+
+    }
+
     @When("User sends HTTPS Request for patients")
     public void user_sends_HTTPS_Request_for_patients() {
 
@@ -290,6 +313,19 @@ public class PatientSD {
         // Log the response body
         response.body().print();
 
+    }
+
+    @Then("User receives {int} Not Found Status with Response body")
+    public void user_receives_404_not_found_status_with_response_body(int expectedStatusCode)
+    {
+        //log file entry
+        LoggerLoad.info("Asserting response status code...");
+
+        //Asserting 200 status code
+        assertEquals(expectedStatusCode, response.getStatusCode());
+
+        // Log the response body
+        response.body().print();
     }
 
     @Given("User creates DELETE Request for the PatientAPI endpoint")
