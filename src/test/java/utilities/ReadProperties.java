@@ -1,13 +1,35 @@
 package utilities;
 
-import java.util.ResourceBundle;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+
 
 
 public class ReadProperties {
-	
-	
-	public static ResourceBundle readProp=ResourceBundle.getBundle("pathAll");
-	public static ReadXLUtils readXLUtils= new ReadXLUtils(readProp.getString("XLPath"));
-	
-	
+
+
+    private static final String CONFIG_FILE_PATH = "src/test/resources/pathAll.properties";
+    private static final Properties properties;
+
+    static {
+        properties = new Properties();
+        try {
+
+            LoggerLoad.info("Reading properties file from: " + CONFIG_FILE_PATH);
+
+            FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH);
+            properties.load(fis);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getProperty(String key) {
+        return properties.getProperty(key);
+    }
+
+
 }

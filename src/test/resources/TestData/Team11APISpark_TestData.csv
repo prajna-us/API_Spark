@@ -1,0 +1,2 @@
+BaseUrl,FirstName,LastName,ContactNumber,Email,Allergy,FoodCategory,DateOfBirth,password,invalidEmail,invalidPW,file,UpLastName,UpAllergy,FirstNameUpdate,LastNameUpdate,ContactNumberUpdate,,AllergyUpdate,FoodCategoryUpdate,DateOfBirthUpdate
+1,Pallavi,Chavubey,2256545621,pallachaubey752@gmail.com,Soy,VEGETARIAN,2000-07-10,test,palla@gmail123,login,C:\\Users\\jithu\\Downloads\\Diabetic.pdf,Jhon,Milk,Walker,Smith,6789034521,,Milk,Vegan,10/7/1991
