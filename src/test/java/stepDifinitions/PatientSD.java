@@ -96,10 +96,41 @@ public class PatientSD {
     @When("User sends HTTPS Request and  request Body with missing  mandatory field")
     public void user_sends_HTTPS_Request_and_request_Body_with_missing_additional_field() {
 
+
+        //log file entry
+        LoggerLoad.info("Reading POST endpoint...");
+
+        String endpoint = ReadProperties.getProperty("Create_New_Patient");
+
+        LoggerLoad.info("Making POST call to create patient...");
+
+        //Reading test data
+        JSONObject testData = readJson.setUpTestData();
+        JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("CreatePatient"));
+
+
+        //reading reprot file...
+        File file = new File(patientInfo.getString("ReportFileLoc"));
+
+
+        // Send the POST request with form parameters
+        response = requestSpec
+                .multiPart("file", file)
+                .post(endpoint);
+
+        // Log the response body
+        response.body().print();
+
+
+
     }
 
     @Then("User receives {int} Bad Request Status with message and boolean success details")
-    public void user_receives_Bad_Request_Status_with_message_and_boolean_success_details(Integer int1) {
+    public void user_receives_Bad_Request_Status_with_message_and_boolean_success_details(int expectedStatusCode) {
+
+        LoggerLoad.info("Asserting response status code...");
+        assertEquals(expectedStatusCode, response.getStatusCode());
+
 
     }
 
