@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         monochrome = true,
         plugin = {
 
-                "pretty", "html:target/CucumberReport/RestAssuredAPI.html"
+                "pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
 //                ,
 //                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 //                ,
