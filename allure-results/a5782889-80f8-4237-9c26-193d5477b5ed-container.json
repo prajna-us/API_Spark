@@ -1,0 +1,1 @@
+{"uuid":"a5782889-80f8-4237-9c26-193d5477b5ed","name":"Scenario: User retrieves all morbidities with a valid API and Bearer Token","children":["4893c1d7-4556-4b1f-9783-27c70a4da008"],"befores":[],"afters":[],"start":1700603197482,"stop":1700603199367}

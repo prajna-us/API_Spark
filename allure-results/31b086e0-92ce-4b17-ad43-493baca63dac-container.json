@@ -1,0 +1,1 @@
+{"uuid":"31b086e0-92ce-4b17-ad43-493baca63dac","name":"Scenario: Check if user is able to retrieve patient file by fileId with valid API","children":["7189f495-2773-443b-aa74-e9894d91fdd9"],"befores":[],"afters":[],"start":1700604871759,"stop":1700604872065}

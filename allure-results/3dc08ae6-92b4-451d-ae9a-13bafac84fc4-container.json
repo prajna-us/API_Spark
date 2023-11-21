@@ -1,0 +1,1 @@
+{"uuid":"3dc08ae6-92b4-451d-ae9a-13bafac84fc4","name":"Scenario: Check if user able to update a patient detail by using patientId and patientInfo with valid endpoint","children":["fdb80617-8768-4fcd-b9a6-7dc0810799ec"],"befores":[],"afters":[],"start":1700604872420,"stop":1700604873432}
