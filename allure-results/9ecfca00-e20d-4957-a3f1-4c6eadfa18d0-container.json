@@ -1,0 +1,1 @@
+{"uuid":"9ecfca00-e20d-4957-a3f1-4c6eadfa18d0","name":"Scenario: Check if user able to create a patient detail with valid endpoint and request body","children":["af27b6d0-4397-4fa1-8286-eeb8c40c2bb5"],"befores":[],"afters":[],"start":1700602836784,"stop":1700602837692}

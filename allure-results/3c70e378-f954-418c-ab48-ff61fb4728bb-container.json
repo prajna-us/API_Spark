@@ -1,0 +1,1 @@
+{"uuid":"3c70e378-f954-418c-ab48-ff61fb4728bb","name":"Scenario: Check if user able to delete  a patient detail by using  invalid patientId  with valid endpoint and request body","children":["05fa47f7-c35d-47ec-bf17-af59505965dc"],"befores":[],"afters":[],"start":1700602842219,"stop":1700602842500}

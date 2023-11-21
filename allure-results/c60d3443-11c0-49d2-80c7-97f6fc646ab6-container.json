@@ -1,0 +1,1 @@
+{"uuid":"c60d3443-11c0-49d2-80c7-97f6fc646ab6","name":"Scenario: Check if user able to update a patient detail by using wrong BaseURL with missing field in request body","children":["f89b45fa-aabb-485d-8433-882449e74337"],"befores":[],"afters":[],"start":1700603205353,"stop":1700603206178}
