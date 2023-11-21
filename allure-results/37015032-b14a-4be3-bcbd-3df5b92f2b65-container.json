@@ -1,0 +1,1 @@
+{"uuid":"37015032-b14a-4be3-bcbd-3df5b92f2b65","name":"Scenario: Check if user able to create a user with invalid password and invalid email","children":["baad1a20-8651-468b-8753-1c0255bb5723"],"befores":[],"afters":[],"start":1700602843654,"stop":1700602844027}

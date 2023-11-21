@@ -1,0 +1,1 @@
+{"uuid":"19823a26-996b-4641-81ac-db5f66a7f718","name":"Scenario: Check if user able to create a patient detail with missing mandatory fields in request body","children":["b6f892a5-37f8-4192-9474-bb3102436d9a"],"befores":[],"afters":[],"start":1700603202545,"stop":1700603203424}
