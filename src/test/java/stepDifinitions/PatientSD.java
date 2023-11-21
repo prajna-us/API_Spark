@@ -28,9 +28,6 @@ public class PatientSD {
 
     private int patientId;
 
-    private String requestBody;
-
-
     @Given("User creates POST Request for the PatientAPI endpoint")
     public void user_creates_POST_Request_for_the_PatientAPI_endpoint() {
 
@@ -61,7 +58,7 @@ public class PatientSD {
         JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("CreatePatient"));
 
 
-        //reading reprot file...
+        //reading report file...
         File file = new File(patientInfo.getString("ReportFileLoc"));
 
 
@@ -107,7 +104,7 @@ public class PatientSD {
         JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("UpdatePatient"));
 
 
-        //reading reprot file...
+        //reading report file...
         File file = new File(patientInfo.getString("ReportFileLoc"));
 
 
@@ -138,6 +135,7 @@ public class PatientSD {
 
 
     }
+
     @Then("User receives  Created Status {int} with response body")
     public void user_receives_Created_Status_with_response_body(int expectedStatusCode) {
 
@@ -154,12 +152,13 @@ public class PatientSD {
 
             ReadProperties.reload();
 
-            System.out.println("PatienId from config is: " + ReadProperties.getProperty("patientId"));
+            System.out.println("PatientId from config is: " + ReadProperties.getProperty("patientId"));
 
         } catch (IOException E) {
 
-        }
+            System.out.println(E.getLocalizedMessage());
 
+        }
 
 
     }
@@ -180,7 +179,7 @@ public class PatientSD {
         JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("CreatePatient"));
 
 
-        //reading reprot file...
+        //reading report file...
         File file = new File(patientInfo.getString("ReportFileLoc"));
 
 
@@ -191,7 +190,6 @@ public class PatientSD {
 
         // Log the response body
         response.body().print();
-
 
 
     }
@@ -225,11 +223,8 @@ public class PatientSD {
         //log file entry
         LoggerLoad.info("Setting baseURI for RestAssured...");
 
-        //reading get url from properties file
-        String baseURL = ReadProperties.getProperty("baseURL");
-
         //setting URI for RestAssured
-        RestAssured.baseURI = baseURL;
+        RestAssured.baseURI = ReadProperties.getProperty("baseURL");
 
 
     }
@@ -377,7 +372,7 @@ public class PatientSD {
         JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("UpdatePatient"));
 
 
-        //reading reprot file...
+        //reading report file...
         File file = new File(patientInfo.getString("ReportFileLoc"));
 
 
@@ -405,7 +400,6 @@ public class PatientSD {
 
         // Log the response body
         response.body().print();
-
 
 
     }
@@ -466,8 +460,7 @@ public class PatientSD {
     }
 
     @Then("User receives {int} Not Found Status with Response body")
-    public void user_receives_404_not_found_status_with_response_body(int expectedStatusCode)
-    {
+    public void user_receives_404_not_found_status_with_response_body(int expectedStatusCode) {
         //log file entry
         LoggerLoad.info("Asserting response status code...");
 

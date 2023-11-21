@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-
-
 public class ReadProperties {
 
     private static final String CONFIG_FILE_PATH = "src/test/resources/pathAll.properties";
@@ -60,7 +58,6 @@ public class ReadProperties {
     public static void reload() {
         loadConfig();
     }
-
 
 
 }
