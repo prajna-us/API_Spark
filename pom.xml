@@ -177,10 +177,21 @@
 						<release>11</release>
 					</configuration>
 				</plugin>
+
+				<plugin>
+					<groupId>io.qameta.allure</groupId>
+					<artifactId>allure-maven</artifactId>
+					<version>2.10.0</version>
+					<configuration>
+						<reportVersion>2.14.0</reportVersion>
+					</configuration>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
-  
+
+
   
   
   

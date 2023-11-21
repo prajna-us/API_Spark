@@ -42,5 +42,10 @@
     "AllergyUpdate": "Milk",
     "FoodCategoryUpdate": "Vegan",
     "DateOfBirthUpdate": "1983-01-07"
+  },
+  "3": {
+    "password": "test",
+    "userLoginEmail": "string@gmail.com"
   }
+
 }
