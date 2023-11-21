@@ -13,19 +13,19 @@ Feature: User Feature
   Scenario: Check if user able to create a user with valid password and invalid email
     Given User creates request for the userlogin API endpoint
     When User sends HTTPS Request and Body with valid password and invalid email
-    Then User receives 400 Bad Request Status with message body
+    Then User receives 401 Bad Request Status with message body
 
   @03PostRequestWithInvalidCredentials
   Scenario: Check if user able to create a user with Invalid password and valid email
     Given User creates request for the userlogin API endpoint
     When User sends HTTPS Request and  request Body with invalid password and valid email
-    Then User receives 400 Bad Request Status with message body
+    Then User receives 401 Bad Request Status with message body
 
   @04PostRequestWithInvalidCredentials
   Scenario: Check if user able to create a user with invalid password and invalid email
     Given User creates request for the userlogin API endpoint
     When User sends HTTPS Request and  request Body with invalid password and invalid email
-    Then User receives 400 Bad Request Status with message body
+    Then User receives 401 Bad Request Status with message body
 
   @05PostRequestWithMissingFields
   Scenario: Check if user able to create a user with missing fields
