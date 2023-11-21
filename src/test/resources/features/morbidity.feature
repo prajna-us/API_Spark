@@ -1,5 +1,4 @@
 Feature: Retrieve all Morbidities
-  I want to use this template for my feature file
 
   Background:
     Given the user has set Authorization to Bearer Token
@@ -16,5 +15,5 @@ Feature: Retrieve all Morbidities
 
   @03GetRequestWithIvalidMorbitityName
   Scenario: Check if user able to get morbidityName by passing invalid morbitity name
-    When User creates GET request for the  morbidity API endpoint
+    When User creates GET request for the  morbidity API endpoint with invalid name
     Then Response status code should be 404  with response body

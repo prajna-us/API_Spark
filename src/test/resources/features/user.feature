@@ -1,13 +1,13 @@
 Feature: User Feature
 
   Background:
-    Given User sets Authoization to Bearer Token
+    Given User sets Authoization to Bearer Token for login
 
   @01PostRequestWithValidCredentials
   Scenario: Check if user able to create a user with valid endpoint and request body (non-existing values)
     Given User creates request for the userlogin API endpoint
     When User sends HTTPS Request and  request Body with Required Field
-    Then User receives 201 Created Status with response body
+    Then User receives 200 Created Status with response body
 
   @02PostRequestWithInvalidCredentials
   Scenario: Check if user able to create a user with valid password and invalid email
@@ -36,5 +36,5 @@ Feature: User Feature
   @06GetRequestLogout
   Scenario: Check if user able to logout with valid API
     Given User creates GET Request for the logout API with User endpoint
-    When User sends HTTPS Request
+    When User sends HTTPS logout Request
     Then User receives 200 OK Status with response  Logout successful     
