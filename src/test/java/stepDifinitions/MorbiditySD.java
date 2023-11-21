@@ -5,9 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import utilities.LoggerLoad;
-import utilities.ReadJson;
 import utilities.ReadProperties;
 
 import static org.junit.Assert.assertEquals;
@@ -16,11 +14,6 @@ public class MorbiditySD {
 
 
     private String bearerToken;
-
-    private RequestSpecification requestSpec;
-
-    private final ReadJson readJson = new ReadJson();
-
     private Response response;
 
 
@@ -155,7 +148,6 @@ public class MorbiditySD {
         response.body().print();
 
     }
-
 
 
 }

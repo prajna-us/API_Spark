@@ -12,29 +12,25 @@ import utilities.LoggerLoad;
 import utilities.ReadJson;
 import utilities.ReadProperties;
 
-import java.io.File;
-
 import static org.junit.Assert.assertEquals;
 
 public class UserSD {
 
-    private String bearerToken;
-
-    private RequestSpecification requestSpec;
-
     private final ReadJson readJson = new ReadJson();
-
+    private String bearerToken;
+    private RequestSpecification requestSpec;
     private Response response;
 
-    	@Given ("User sets Authoization to Bearer Token for login")
-	public void user_sets_authoization_to_bearer_token_for_login () {
+    @Given("User sets Authoization to Bearer Token for login")
+    public void user_sets_authoization_to_bearer_token_for_login() {
 
-            LoggerLoad.info("Reading token...");
-            ReadProperties.loadConfig();
-            bearerToken = ReadProperties.getProperty("bearerToken");
+        LoggerLoad.info("Reading token...");
+        ReadProperties.loadConfig();
+        bearerToken = ReadProperties.getProperty("bearerToken");
 
 
-	}
+    }
+
     @Given("User creates request for the userlogin API endpoint")
     public void user_creates_request_for_the_userlogin_API_endpoint() {
 
@@ -182,11 +178,6 @@ public class UserSD {
 
         LoggerLoad.info("Making POST call for patient login...");
 
-
-        //Reading test data
-        JSONObject testData = readJson.setUpTestData();
-        JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("PatientLogin"));
-
         // Convert patientInfo to JSON string
         String patientInfoJson = "{" +
                 "\"password\":\"" + "test1" + "\"," +
@@ -217,11 +208,6 @@ public class UserSD {
 
         LoggerLoad.info("Making POST call for patient login...");
 
-
-        //Reading test data
-        JSONObject testData = readJson.setUpTestData();
-        JSONObject patientInfo = testData.getJSONObject(ReadProperties.getProperty("PatientLogin"));
-
         // Convert patientInfo to JSON string
         String patientInfoJson = "";
 
@@ -245,18 +231,15 @@ public class UserSD {
         //log file entry
         LoggerLoad.info("Setting baseURI for RestAssured...");
 
-        //reading get url from properties file
-        String baseURL = ReadProperties.getProperty("baseURL");
-
         //setting URI for RestAssured
-        RestAssured.baseURI = baseURL;
+        RestAssured.baseURI = ReadProperties.getProperty("baseURL");
 
 
     }
 
 
     @When("User sends HTTPS logout Request")
-    public void patient_logout(){
+    public void patient_logout() {
 
         //log file entry
         LoggerLoad.info("Reading GET endpoint...");
